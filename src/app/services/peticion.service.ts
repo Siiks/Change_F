@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,30 +16,19 @@ export class PeticionService {
   }
 
   index() {
-    return this.http.get<any[]>(this.apiUrl + 'listado');
+    return this.http.get<any[]>(this.apiUrl + '/listado');
   }
 
-  enviarFormulario(
-    titulo: string,
-    descripcion: string,
-    destinatario: string,
-    category_id: string
-  ) {
+  crear(peticion: any) {
+
     const token = localStorage.getItem('token');
     const url = 'http://localhost:8000/api/peticiones/add';
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    const body = {
-      titulo,
-      descripcion,
-      destinatario,
-      category_id,
+        'Authorization': `Bearer ${token}`
+      })
     };
 
-    console.log(body);
-    return this.http.post<any>(url, body, httpOptions);
+    return this.http.post<any>(url, peticion, httpOptions).subscribe();
   }
 }

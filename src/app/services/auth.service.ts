@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   register(user: any) {
-    return this.http.post(`${this.apiUrl}/register`, user);
+    return this.http.post(`${this.apiUrl}/register`, user).subscribe();
   }
 
   login(user: any) {
@@ -24,9 +24,9 @@ export class AuthService {
         const token = response.access_token;
         this.token = token;
         localStorage.setItem('token', this.token);
-        this.router.navigateByUrl('/home');
+        localStorage.setItem('actualUser', user.email)
       })
-    );
+    ).subscribe()
   }
 
 
@@ -36,7 +36,8 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<any>(`${this.apiUrl}/logout`, {}, httpOptions);
+    localStorage.removeItem('actualUser');
+    return this.http.post<any>(`${this.apiUrl}/logout`, {}, httpOptions).subscribe();
   }
 
   getToken() {
@@ -49,5 +50,16 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return !!token;
+  }
+
+  getUser() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.getToken()}`
+      })
+    };
+    console.log(this.http.get(`${this.apiUrl}/me`, httpOptions));
+    
+    return this.http.get<any>(`${this.apiUrl}/me`, httpOptions);
   }
 }

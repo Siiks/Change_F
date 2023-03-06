@@ -10,6 +10,7 @@ import { HeaderLayoutComponent } from './layout/header-layout/header-layout.comp
 import { AuthService } from './services/auth.service';
 import { PeticionService } from './services/peticion.service';
 import { HomeComponent } from './home/home.component';
+import { PeticionesComponent } from './peticiones/peticiones.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
     FooterLayoutComponent,
     FooterLayoutComponent,
     HomeComponent,
+    PeticionesComponent,
   ],
   imports: [
     BrowserModule,
