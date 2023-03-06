@@ -3,17 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderLayoutComponent } from './header-layout/header-layout.component';
-import { FooterlayoutComponent } from './footer-layout/footerlayout.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { UserServiceService } from './services/user-service.service';
+import { FooterLayoutComponent } from './layout/footer-layout/footer-layout.component';
+import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component';
+import { AuthService } from './services/auth.service';
+import { PeticionService } from './services/peticion.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderLayoutComponent,
-    FooterlayoutComponent,
+    FooterLayoutComponent,
+    FooterLayoutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,8 @@ import { UserServiceService } from './services/user-service.service';
     FormsModule,
   ],
   providers: [
-    UserServiceService],
+    AuthService,
+    PeticionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

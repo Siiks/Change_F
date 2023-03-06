@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change.org</title>
+</head>
+
+<body>
+<div class="main-container">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" style="color: #EC2C22;">Change.org</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic"
+                    aria-controls="navbarBasic" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarBasic">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal"
+                           data-bs-target="#exampleModal">Iniciar peticion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Mis peticiones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Peticiones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Mis peticiones firmadas</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-dark" type="submit">Buscar</button>
+                    <a class="nav-link" aria-current="page">Hola,</a>
+                    <a class="nav-link active" href=""
+                       style="color:black;">Logout</a>
+                    <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                    style="color:black;">Login</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- PETICION Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar Peticion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id= "addform" method="post" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="formControlInput" class="form-label">Titulo</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo">
+                    <label for="formControlInput" class="form-label">Categorias</label>
+                    <select class="form-select" aria-label="Default select" name="category" id="category">
+                        <option selected="">Selecciona una categoria</option>
+                        <option></option>
+                    </select>
+                    <label for="formControlInput" class="form-label">Descripcion</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                    <label for="formControlInput" class="form-label">Destinatario</label>
+                    <input type="text" class="form-control" id="destinatario" name="destinatario" placeholder="Destinario">
+                    <label for="formControlInput" class="form-label">Imagen</label>
+                    <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" id="formControlInput" name="image" placeholder="Selecciona una imagen">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Mandar peticion</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--LOGIN MODAL-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar Peticion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="">
+                <div class="modal-body register">
+                    <label for="formControlInput" class="form-label">Correo electronico</label>
+                    <input type="email" [(ngModel)]="email" class="form-control" id="formControlInput" name="email" placeholder="name@example.com">
+                    <label for="formControlInput" class="form-label">Contraseña</label>
+                    <input type="password" [(ngModel)]="password" class="form-control" id="formControlInput" name="password" placeholder="Contraseña">
+                    <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal"
+                       data-bs-target="#registerModal" style="color:black;" data-bs-dismiss="modal">Registrarse</a>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" (click)="login()">Entrar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--REGISTER-MODAL-->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar Peticion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="">
+                <div class="modal-body register">
+                    <label for="formControlInput" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" [(ngModel)]="name" id="formControlInput" name="name" placeholder="Nombre">
+                    <label for="formControlInput" class="form-label">Correo Electronico</label>
+                    <input type="email" class="form-control" [(ngModel)]="email" id="formControlInput" name="email" placeholder="name@example.com">
+                    <label for="formControlInput"  class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" [(ngModel)]="password" id="formControlInput" name="password" placeholder="Contraseña">
+                    <label for="formControlInput" class="form-label">Repetir contraseña</label>
+                    <input type="password" class="form-control" [(ngModel)]="confirm_password" name="password_confirmation" id="formControlInput" placeholder="Contraseña">
+                    <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal"
+                       style="color:black;">Volver al Login</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" (click)="register()">Registrarse</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+
+</div>
+<!-- Footer -->
+<script   src="{{asset('js/bootstrap.bundle.js')}}"> </script>
+<script src="{{asset('js/4c3cdd8d5f.js')}}" crossorigin="anonymous"></script>
+<script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#formSubmit').click(function(e){
+
+            e.preventDefault();
+
+            $.ajaxSetup({
+
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+
+            });
+
+            $.ajax({
+
+                url: "{{ url('/peticiones') }}",
+
+                method: 'post',
+
+                data: {
+
+                    titulo: $('#titulo').val(),
+
+                    descripcion: $('#descripcion').val(),
+
+                    category: $('#category').val(),
+
+                    destinatario: $('#destinatario').val(),
+
+                    image: $('#imageId').val(),
+
+                },
+
+                success: function(result){
+
+                    if(result.errors)
+
+                    {
+
+                        $('.alert-danger').html('');
+
+
+                        $.each(result.errors, function(key, value){
+
+                            $('.alert-danger').show();
+
+                            $('.alert-danger').append('<li>'+value+'</li>');
+
+                        });
+
+                    }
+
+                    else
+
+                    {
+
+                        $('.alert-danger').hide();
+
+                        $('#peticionModal').modal('hide');
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    });
+</script>
+</body>
+
+</html>
