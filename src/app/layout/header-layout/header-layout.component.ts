@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PeticionService } from 'src/app/services/peticion.service';
@@ -19,43 +19,64 @@ export class HeaderLayoutComponent implements OnInit {
   descripcion!: string;
   destinatario!: string;
   idCategoria!: number;
-  constructor(private userService: AuthService, private peticionService: PeticionService, private router: Router) {
+  constructor(private userService: AuthService, private peticionService: PeticionService, private router: Router, private cdr: ChangeDetectorRef) {
 
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.getDatos();
+    this.cdr.detectChanges();
   }
 
-  async login() {
+  login() {
     const user: any = {
       email: this.email,
       password: this.password
     }
-    console.log(user);
 
 
-    this.res = await this.userService.login(user);
+    this.res = this.userService.login(user).subscribe(() => {
+      this.getDatos();
+      this.cdr.detectChanges();
+    });
 
+    this.name = '';
+    this.email = '';
+    this.password = '';
+    this.confirm_password = '';
   }
 
-  async register() {
+  register() {
     const user: any = {
       name: this.name,
       email: this.email,
       password: this.password,
     }
 
-    this.res = await this.userService.register(user);
+    this.res = this.userService.register(user).subscribe(() => {
+      // Actualiza la vista de la componente después de hacer login
+      this.getDatos();
+      this.cdr.detectChanges();
+    });
 
-    console.log(user);
+    this.name = '';
+    this.email = '';
+    this.password = '';
+    this.confirm_password = '';
 
   }
-  async logout() {
-    this.userService.logout(localStorage.getItem('token'));
-    
+
+  logout() {
+    this.userService.logout(localStorage.getItem('token')).subscribe(() => {
+      // Actualiza la vista de la componente después de hacer login
+      this.userLogged = null;
+      this.cdr.detectChanges();
+    });
+
+    localStorage.removeItem('token');
+
   }
 
-  async getDatos() {
+  getDatos() {
     this.userService
       .getUser()
       .subscribe((user) => (this.userLogged = user));
@@ -76,7 +97,9 @@ export class HeaderLayoutComponent implements OnInit {
       destinatario: this.destinatario,
       category: this.idCategoria
     }
-    this.res = await this.peticionService.crear(peticion)
+    this.res = this.peticionService.crear(peticion).subscribe(() => {
+      this.router.navigate(['/'])
+    })
     console.log(this.res);
   }
 

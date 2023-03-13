@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { PeticionService } from '../services/peticion.service';
 
 @Component({
@@ -9,12 +10,12 @@ import { PeticionService } from '../services/peticion.service';
 export class PeticionesComponent implements OnInit {
   peticiones: any[] = [];
 
-  constructor(private peticioneService: PeticionService){}
 
-  ngOnInit(): void {
+  constructor(private peticioneService: PeticionService, private cdr: ChangeDetectorRef){}
+
+  ngOnInit() {
     this.getPeticiones();
   }
-
 
   getPeticiones() {
     this.peticioneService
@@ -22,6 +23,6 @@ export class PeticionesComponent implements OnInit {
       .subscribe((peticiones: any) =>{
         this.peticiones = peticiones.data
        });
-      
+
   }
 }

@@ -15,10 +15,11 @@ export class AuthService {
   }
 
   register(user: any) {
-    return this.http.post(`${this.apiUrl}/register`, user).subscribe();
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 
   login(user: any) {
+
     return this.http.post(`${this.apiUrl}/login`, user).pipe(
       tap((response: any) => {
         const token = response.access_token;
@@ -26,7 +27,7 @@ export class AuthService {
         localStorage.setItem('token', this.token);
         localStorage.setItem('actualUser', user.email)
       })
-    ).subscribe()
+    )
   }
 
 
@@ -37,7 +38,7 @@ export class AuthService {
       })
     };
     localStorage.removeItem('actualUser');
-    return this.http.post<any>(`${this.apiUrl}/logout`, {}, httpOptions).subscribe();
+    return this.http.post<any>(`${this.apiUrl}/logout`, {}, httpOptions);
   }
 
   getToken() {
@@ -59,7 +60,7 @@ export class AuthService {
       })
     };
     console.log(this.http.get(`${this.apiUrl}/me`, httpOptions));
-    
+
     return this.http.get<any>(`${this.apiUrl}/me`, httpOptions);
   }
 }

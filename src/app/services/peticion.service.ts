@@ -1,13 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeticionService {
-
   private apiUrl = 'http://localhost:8000/api/peticiones';
 
   token: any;
@@ -28,7 +27,7 @@ export class PeticionService {
         'Authorization': `Bearer ${token}`
       })
     };
-
-    return this.http.post<any>(url, peticion, httpOptions).subscribe();
+    return this.http.post<any>(url, peticion, httpOptions);
   }
+
 }

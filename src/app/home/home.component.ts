@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { PeticionService } from '../services/peticion.service';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   user: any;
   listPeticiones: any[] = [];
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
