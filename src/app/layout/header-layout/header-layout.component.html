@@ -37,8 +37,8 @@
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                     <button class="btn btn-dark" type="submit">Buscar</button>
                     <a class="nav-link mx-3" aria-current="page" *ngIf="usuarioLogeado()">Hola,{{userLogged.name}}</a>
-                    <a class="btn btn-primary mx-3" (click)="logout()">Logout</a>
-                    <a class="btn btn-primary mx-3" aria-current="page" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    <a class="btn btn-primary mx-3" (click)="logout()" *ngIf="usuarioLogeado()">Logout</a>
+                    <a class="btn btn-primary mx-3" aria-current="page" data-bs-toggle="modal" data-bs-target="#loginModal" *ngIf="!usuarioLogeado()">Login</a>
                 </form>
             </div>
         </div>
