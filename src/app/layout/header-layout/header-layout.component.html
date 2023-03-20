@@ -39,6 +39,7 @@
                     <a class="nav-link mx-3" aria-current="page" *ngIf="usuarioLogeado()">Hola,{{userLogged.name}}</a>
                     <a class="btn btn-primary mx-3" (click)="logout()" *ngIf="usuarioLogeado()">Logout</a>
                     <a class="btn btn-primary mx-3" aria-current="page" data-bs-toggle="modal" data-bs-target="#loginModal" *ngIf="!usuarioLogeado()">Login</a>
+                    <a class="btn btn-primary mx-3" aria-current="page" data-bs-toggle="modal" data-bs-target="#registerModal" *ngIf="!usuarioLogeado()">Register</a>
                 </form>
             </div>
         </div>
@@ -69,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" (click)="crearPeticion()">Mandar peticion</button>
+                    <button type="submit" class="btn btn-primary"  (click)="crearPeticion()" data-bs-dismiss="modal">Mandar peticion</button>
                 </div>
                 </form>
             </div>
@@ -215,5 +216,4 @@
     });
 </script>
 </body>
-
 </html>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, Input  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PeticionService } from 'src/app/services/peticion.service';
@@ -19,6 +19,8 @@ export class HeaderLayoutComponent implements OnInit {
   descripcion!: string;
   destinatario!: string;
   idCategoria!: number;
+  @Output() miFuncion!: EventEmitter<void>;
+
   constructor(private userService: AuthService, private peticionService: PeticionService, private router: Router, private cdr: ChangeDetectorRef) {
 
   }
@@ -67,7 +69,7 @@ export class HeaderLayoutComponent implements OnInit {
 
   logout() {
     this.userService.logout(localStorage.getItem('token')).subscribe(() => {
-      // Actualiza la vista de la componente después de hacer login
+      // Actualiza la vista de la componente después de hacer logout
       this.userLogged = null;
       this.cdr.detectChanges();
     });
@@ -98,9 +100,17 @@ export class HeaderLayoutComponent implements OnInit {
       category: this.idCategoria
     }
     this.res = this.peticionService.crear(peticion).subscribe(() => {
-      this.router.navigate(['/'])
-    })
-    console.log(this.res);
+      this.peticionService.index().subscribe((pet: any) => {
+        this.peticionService.rellenarPeticiones(pet)
+      })
+    });
+
+
+    this.titulo = '';
+    this.descripcion = '';
+    this.destinatario = '';
+    this.idCategoria = 0;
   }
+
 
 }

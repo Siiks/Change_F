@@ -8,20 +8,25 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PeticionService {
   private apiUrl = 'http://localhost:8000/api/peticiones';
-
+  peticiones: any[] = [];
   token: any;
   constructor(private http: HttpClient, public router: Router) {
-    this.token = '';
+    this.token = ''
+    this.index()
   }
 
   index() {
     return this.http.get<any[]>(this.apiUrl + '/listado');
   }
 
+  rellenarPeticiones(respuesta: any){
+    this.peticiones = respuesta.data;
+  }
+
   crear(peticion: any) {
 
     const token = localStorage.getItem('token');
-    const url = 'http://localhost:8000/api/peticiones/add';
+    const url = this.apiUrl+'/add';
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`

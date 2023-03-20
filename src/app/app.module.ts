@@ -28,7 +28,7 @@ import { PeticionesComponent } from './peticiones/peticiones.component';
   ],
   providers: [
     AuthService,
-    PeticionService],
+    PeticionService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
