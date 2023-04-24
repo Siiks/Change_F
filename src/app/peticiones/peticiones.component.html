@@ -6,6 +6,7 @@
         <th scope="col">DESCRIPCION</th>
         <th scope="col">DESTINATARIO</th>
         <th scope="col">IMAGEN</th>
+        <th scope="col" *ngIf="loggedUser?.role == 1">ACCIONES</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,10 @@
         <td>{{peticion.descripcion}}</td>
         <td>{{peticion.destinatario}}</td>
         <td> <img src="http://localhost:8000/{{peticion.file}}" class="card-img-top" style="width: 100px" alt="..."></td>
+        <td *ngIf="loggedUser?.role == 1"><div class="d-flex">
+          <a href="javascript:void(0);" (click)="deletePeticiones(peticion.id)"><i class="fa fa-trash"></i></a>
+          <a href="javascript:void(0);" class="ms-3" (click)="editPeticion(peticion.id)"><i class="fa fa-pencil"></i></a>
+        </div></td>
       </tr>
     </tbody>
   </table>

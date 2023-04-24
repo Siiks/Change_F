@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PeticionService } from '../services/peticion.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class MisPeticionesComponent implements OnInit {
   idUsuario: string;
   peticiones: any[] = [];
 
-  constructor(public readonly peticioneService: PeticionService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
+  constructor(public readonly peticioneService: PeticionService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router) {
     this.idUsuario = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
   }
 
@@ -22,8 +22,15 @@ export class MisPeticionesComponent implements OnInit {
   getPeticionesByIdUsuario(idUsuario: number) {
     this.peticioneService.getPeticionesByIdUsuario(idUsuario).subscribe((peticion: any) => {
       this.peticiones = peticion;
-      console.log(this.peticiones);
+    });
+  }
+  deletePeticiones(idPeticion: number) {
+    this.peticioneService.deletePeticion(idPeticion).subscribe(() => {
+      this.getPeticionesByIdUsuario(Number(this.idUsuario));
+    });
+  }
 
-    })
+  editPeticion(idPeticion: number) {
+    this.router.navigate([`peticion/${idPeticion}`])
   }
 }

@@ -59,8 +59,7 @@ export class AuthService {
         'Authorization': `Bearer ${this.getToken()}`
       })
     };
-    console.log(this.http.get(`${this.apiUrl}/me`, httpOptions));
-
     return this.http.get<any>(`${this.apiUrl}/me`, httpOptions);
   }
+  
 }

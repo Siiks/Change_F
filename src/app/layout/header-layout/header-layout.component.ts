@@ -52,6 +52,7 @@ export class HeaderLayoutComponent implements OnInit {
     this.res = this.userService.login(user).subscribe(() => {
       this.getDatos();
       this.cdr.detectChanges();
+      window.location.reload();
     });
 
     this.name = '';
@@ -68,7 +69,9 @@ export class HeaderLayoutComponent implements OnInit {
     }
 
     this.res = this.userService.register(user).subscribe(() => {
-      // Actualiza la vista de la componente después de hacer login
+      this.userService.login(user).subscribe(() => {
+        window.location.reload();
+      });
       this.getDatos();
       this.cdr.detectChanges();
     });
@@ -77,6 +80,7 @@ export class HeaderLayoutComponent implements OnInit {
     this.email = '';
     this.password = '';
     this.confirm_password = '';
+    
 
   }
 
@@ -85,10 +89,10 @@ export class HeaderLayoutComponent implements OnInit {
       // Actualiza la vista de la componente después de hacer logout
       this.userLogged = null;
       this.cdr.detectChanges();
+      window.location.reload();
     });
 
     localStorage.removeItem('token');
-
   }
 
   getDatos() {

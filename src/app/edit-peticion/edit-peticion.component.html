@@ -1,0 +1,68 @@
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Peticion Details</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="titulo">Titulo</label>
+                            <input class="form-control" id="titulo" type="text" name="titulo"
+                                [(ngModel)]="peticion.titulo">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="descripcion">Descripcion</label>
+                                <input class="form-control" id="descripcion" name="descripcion"
+                                    [(ngModel)]="peticion.descripcion" type="text" value="Valerie">
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="destinatario">Destinatario</label>
+                                <input class="form-control" id="destinatario" type="text" name="destinatario"
+                                    [(ngModel)]="peticion.destinatario" value="Luna">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row">
+                            <div class="col-8 d-flex flex-column">
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (organization name)-->
+                                    <div class="col-md-12">
+                                        <label class="small mb-1" for="category">Categoria</label>
+                                        <select class="form-select" [(ngModel)]="peticion.category_id"
+                                            aria-label="Default select" name="category" id="category">
+                                            <option>Selecciona una categoria</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-12">
+                                        <label class="small mb-1" for="inputPhone">Cambiar imagen</label>
+                                       <input type="file" (change)="onSelectImage($event)" accept="image/x-png,image/gif,image/jpeg" class="form-control" id="formControlInput" name="file" placeholder="Selecciona una imagen">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 d-flex flex-column align-items-center">
+                                <label for="imagen">Imagen actual</label>
+                                <img src="http://localhost:8000/{{peticion.file}}" class="card-img-top"
+                                    style="width: 200px" alt="...">
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button" (click)="editPeticion()">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

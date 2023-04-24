@@ -11,6 +11,7 @@ import { AuthService } from './services/auth.service';
 import { PeticionService } from './services/peticion.service';
 import { PeticionesComponent } from './peticiones/peticiones.component';
 import { MisPeticionesComponent } from './mis-peticiones/mis-peticiones.component';
+import { EditPeticionComponent } from './edit-peticion/edit-peticion.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MisPeticionesComponent } from './mis-peticiones/mis-peticiones.componen
     FooterLayoutComponent,
     PeticionesComponent,
     MisPeticionesComponent,
+    EditPeticionComponent,
   ],
   imports: [
     BrowserModule,
