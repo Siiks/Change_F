@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Route } from '@angular/router';
 import { Subject } from 'rxjs';
 import { PeticionService } from '../services/peticion.service';
 
@@ -8,23 +10,32 @@ import { PeticionService } from '../services/peticion.service';
   styleUrls: ['./peticiones.component.css']
 })
 export class PeticionesComponent implements OnInit {
-  peticiones: any[] = [];
   @Output() funcion: (() => void) | undefined;
 
-  constructor(public readonly peticioneService: PeticionService, private cdr: ChangeDetectorRef){}
+  form!: FormGroup;
+  idUsuario: any;
+  peticiones: any;
 
-  ngOnInit() {
-    this.getPeticiones();
-    console.log(this.peticioneService.peticiones);
+  constructor(public readonly peticioneService: PeticionService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  }
 
+  async ngOnInit() {
+    this.form = this.fb.group({
+      id: '',
+      titulo: '',
+      descripcion: '',
+      destinatario: '',
+      category_id: '',
+      file: ''
+    })
+      this.getPeticiones();
   }
 
   getPeticiones() {
     this.peticioneService
       .index()
-      .subscribe((peticiones: any) =>{
+      .subscribe((peticiones: any) => {
         this.peticioneService.rellenarPeticiones(peticiones)
-       });
-
+      });
   }
 }

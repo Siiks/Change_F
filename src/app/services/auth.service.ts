@@ -48,9 +48,9 @@ export class AuthService {
     return this.token;
   }
 
-  isAuthenticated(): boolean {
+  isAuthenticated() {
     const token = localStorage.getItem('token');
-    return !!token;
+    return token;
   }
 
   getUser() {

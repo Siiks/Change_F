@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, Input  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PeticionService } from 'src/app/services/peticion.service';
@@ -19,12 +20,24 @@ export class HeaderLayoutComponent implements OnInit {
   descripcion!: string;
   destinatario!: string;
   idCategoria!: number;
+  imagen!: any;
+  selectedImage!: any;
+  form!: FormGroup;
   @Output() miFuncion!: EventEmitter<void>;
 
-  constructor(private userService: AuthService, private peticionService: PeticionService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private userService: AuthService, private peticionService: PeticionService, private router: Router, private cdr: ChangeDetectorRef, private fb: FormBuilder) {
 
   }
   ngOnInit() {
+    this.form = this.fb.group({
+      id: '',
+      titulo: '',
+      descripcion: '',
+      destinatario: '',
+      category_id: '',
+      file: ''
+    });
+
     this.getDatos();
     this.cdr.detectChanges();
   }
@@ -92,14 +105,15 @@ export class HeaderLayoutComponent implements OnInit {
     }
   }
 
-  async crearPeticion(){
-    const peticion = {
-      titulo: this.titulo,
-      descripcion: this.descripcion,
-      destinatario: this.destinatario,
-      category: this.idCategoria
-    }
-    this.res = this.peticionService.crear(peticion).subscribe(() => {
+  async crearPeticion() {
+    const formData = new FormData();
+    formData.append('titulo', this.titulo);
+    formData.append('category', String(this.idCategoria));
+    formData.append('descripcion', this.descripcion);
+    formData.append('destinatario', this.destinatario);
+    formData.append('file', this.selectedImage);
+
+    this.res = this.peticionService.crear(formData).subscribe(() => {
       this.peticionService.index().subscribe((pet: any) => {
         this.peticionService.rellenarPeticiones(pet)
       })
@@ -112,5 +126,11 @@ export class HeaderLayoutComponent implements OnInit {
     this.idCategoria = 0;
   }
 
+  misPeticiones(idUsuario: any) {
+    this.router.navigate([`misPeticiones/${idUsuario}`]);
+  }
+  onSelectImage(event: any) {
+    this.selectedImage = event.target.files[0];
+  }
 
 }

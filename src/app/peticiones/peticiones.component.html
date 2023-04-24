@@ -5,6 +5,7 @@
         <th scope="col">TITULO</th>
         <th scope="col">DESCRIPCION</th>
         <th scope="col">DESTINATARIO</th>
+        <th scope="col">IMAGEN</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
         <td>{{peticion.titulo}}</td>
         <td>{{peticion.descripcion}}</td>
         <td>{{peticion.destinatario}}</td>
+        <td> <img src="http://localhost:8000/{{peticion.file}}" class="card-img-top" style="width: 100px" alt="..."></td>
       </tr>
     </tbody>
   </table>

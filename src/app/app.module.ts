@@ -9,8 +9,8 @@ import { FooterLayoutComponent } from './layout/footer-layout/footer-layout.comp
 import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component';
 import { AuthService } from './services/auth.service';
 import { PeticionService } from './services/peticion.service';
-import { HomeComponent } from './home/home.component';
 import { PeticionesComponent } from './peticiones/peticiones.component';
+import { MisPeticionesComponent } from './mis-peticiones/mis-peticiones.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { PeticionesComponent } from './peticiones/peticiones.component';
     HeaderLayoutComponent,
     FooterLayoutComponent,
     FooterLayoutComponent,
-    HomeComponent,
     PeticionesComponent,
+    MisPeticionesComponent,
   ],
   imports: [
     BrowserModule,

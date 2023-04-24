@@ -24,7 +24,7 @@
                            data-bs-target="#exampleModal" *ngIf="usuarioLogeado()">Iniciar peticion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href=""  *ngIf="usuarioLogeado()">Mis peticiones</a>
+                        <a class="nav-link active" aria-current="page" *ngIf="usuarioLogeado()" (click)="misPeticiones(userLogged.id)">Mis peticiones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="">Peticiones</a>
@@ -66,7 +66,7 @@
                     <label for="formControlInput" class="form-label">Destinatario</label>
                     <input type="text" class="form-control" [(ngModel)]="destinatario" id="destinatario" name="destinatario" placeholder="Destinario">
                     <label for="formControlInput" class="form-label">Imagen</label>
-                    <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" id="formControlInput" name="image" placeholder="Selecciona una imagen">
+                    <input type="file" (change)="onSelectImage($event)" accept="image/x-png,image/gif,image/jpeg" class="form-control" id="formControlInput" name="file" placeholder="Selecciona una imagen">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
