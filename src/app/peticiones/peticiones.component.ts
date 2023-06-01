@@ -18,7 +18,11 @@ export class PeticionesComponent implements OnInit {
   peticiones: any;
   loggedUser!: any;
 
-  constructor(public readonly peticioneService: PeticionService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder, private actualUser: AuthService) {
+  constructor(public readonly peticioneService: PeticionService,
+    private cdr: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute,
+    private router: Router, private fb: FormBuilder,
+    private actualUser: AuthService) {
   }
 
   async ngOnInit() {
@@ -57,6 +61,6 @@ export class PeticionesComponent implements OnInit {
     });
   }
   editPeticion(idPeticion: number) {
-      this.router.navigate([`peticion/${idPeticion}`])
+    this.router.navigate([`peticion/${idPeticion}`])
   }
 }
